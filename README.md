@@ -1,5 +1,5 @@
 # Ndigital
-Sistema de ventas de productos por Web utiliando flask, sqlite, html, css, etc
+Sistema de ventas de productos por Web utilizando flask, sqlite, html, css, etc
 Obs: -leer los comentarios de config.py ante cualquier error posible
      -la base de datos esta contenida en la carpeta originalgifs con el nombre 	de tienda.db
 
