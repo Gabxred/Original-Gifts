@@ -1,0 +1,48 @@
+<!DOCTYPE HTML5>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <STYLE type="text/css">
+        H1 { text-align: center}
+        H2 { text-align: center}
+        H3 { text-align: center}
+       div.centerTable table {
+       margin: 0 auto;
+       text-align: left;}
+    </STYLE>
+   <body>
+     
+    
+    <div class='centerTable'>
+    <table border="1">
+          <h1> Original Gifts </h1>
+        <h2 >Pedido de {{usuar}}: </h2>
+      
+        <tr>
+      
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          
+          
+      
+        </tr>
+        <tbody>
+          {% for data in invent %}
+          <tr>
+              
+            <td>{{ data[0] }}</td>
+        
+            <td>{{ data[1] }}</td>
+        
+            <td>{{ data[2] }}</td>
+            
+            </tr>
+        {% endfor %}
+        
+       
+      
+      </table>
+      <h3>TOTAL: {{ total }}</h3>
+    </div> 
+  </body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Original Gifts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="static/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="static/stylesheet/styles.css" />
+<script language="javascript" type="text/javascript">
+
+function clearText(field) {
+    if (field.defaultValue == field.value) field.value = '';
+    else if (field.value == '') field.value = field.defaultValue;
+}
+</script>
+<script language="javascript" type="text/javascript" src="static/scripts/mootools-1.2.1-core.js"></script>
+<script language="javascript" type="text/javascript" src="static/scripts/mootools-1.2-more.js"></script>
+<script language="javascript" type="text/javascript" src="static/scripts/slideitmoo-1.1.js"></script>
+<script language="javascript" type="text/javascript">
+window.addEvents({
+    'domready': function () { /* thumbnails example , div containers */
+        new SlideItMoo({
+            overallContainer: 'SlideItMoo_outer',
+            elementScrolled: 'SlideItMoo_inner',
+            thumbsContainer: 'SlideItMoo_items',
+            itemsVisible: 5,
+            elemsSlide: 3,
+            duration: 200,
+            itemsSelector: '.SlideItMoo_element',
+            itemWidth: 140,
+            showControls: 1
+        });
+    },
+
+});
+</script>
+</head>
+<body>
+<div id="wrapper">
+  <div id="menu">
+    <ul>
+      <li><a href="/loggeo" method="GET" class="current"><span>.01</span>Inicio</a></li>
+      <li><a href="/productos1"><span>.02</span>Productos</a></li>
+      {% if cat=='C' %}
+        <li><a href="/pedidoactual"><span>.03</span>Pedidos</a></li>
+        {% else %}
+          <li><a href="/0venta"><span>.03</span>Pedidos</a></li>
+      {% endif %}
+      <li><a href="/Alink1"><span>.04</span>Galeria</a></li>
+      <li><a href="/aboutC"><span>.05</span>Nosotros</a></li>
+      <li><a href="/Blink1"><span>.06</span>Contactenos</a></li>
+    </ul>
+  </div>
+  <!-- end of menu -->
+  <div id="header_bar">
+    <div id="header">
+      <div class="right"></div>
+      <h1><a href="/loggeo" method="GET"> <img src="static/images/logo.png" alt="" /> </a></h1>
+    </div>
+    <div id="search_box">
+      <form action="/search1" method="POST">
+        <input type="text" value="Ingresa Texto..." name="buscar" size="10" id="searchfield" onfocus="clearText(this)" onblur="clearText(this)" />
+        <input type="submit" name="Search" value="" alt="Search" id="searchbutton" />      </form>
+    </div>
+    
+  </div>
+  <script>
+  function elegido(a)
+  {
+    var data = btoa(a);
+    document.getElementById("imagen2").src = "data:image/png/jpeg;base64," + data;
+  }
+</script>
+  <!-- end of header_bar -->
+  <div class="cleaner"></div>
+  <div id="sidebar">
+    <div class="sidebar_top"></div>
+    <div class="sidebar_bottom"></div>
+    <div class="sidebar_section">
+      <h2>Original gifts</h2>
+      <form action="/loggeo" method="POST">
+        <label>Bienvenido {{username}}</label>
+        <ul class="opcion_list">
+            <!-- Aqui e distinge los usuarios-->
+            {% if cat=='C' %}
+            <li><a href="/cuenta" method='GET'>Cuenta</a></li>
+            <li><a href="/pedidoactual">Mis pedidos</a></li>
+            {% endif %}
+
+            {% if cat=='A' %}
+                <li><a href="/invent" method='GET'>Inventario</a></li>
+                <li><a href="/adminusr">Administrar cuentas</a></li>
+                <li><a href="/0venta">Mis ventas</a></li>
+            {% endif %}
+            <li><a href="/">Cerrar sesion</a></li>
+        </ul>
+      </form>
+      <div class="cleaner"></div>
+    </div>
+    <div class="sidebar_section">
+      <h2>Categorias</h2>
+      <ul class="categories_list">
+       <li><a href="/1categoria1">Combos</a></li>
+        <li><a href="/1categoria2">Tazas</a></li>
+        <li><a href="/1categoria3">Medias</a></li>
+        <li><a href="/1categoria4">Collares</a></li>
+        <li><a href="/1categoria5">Vasos</a></li>
+        <li><a href="/1categoria6">Almohadas</a></li>
+        <li><a href="/1categoria7">Peluches</a></li>
+        <li><a href="/1categoria8">Pendrives</a></li>
+        <li><a href="/1categoria9">Pijamas</a></li>
+        <li><a href="/1categoria10">Otros</a></li>
+      </ul>
+    </div>
+    
+  </div>
+  <!-- end of sidebar -->
+  <div id="content">
+    <div id="latest_product_gallery">
+      <div id="SlideItMoo_outer4">
+        <div id="SlideItMoo_inner2">
+            <div class="SlideItMoo_element"> <a href="#"> <img src="static/images/busqueda.png" alt="" /></a> </div>
+            <table class="tabla">
+
+                <h2>Resultados de Busqueda:</h2>
+                {% if  error %}
+                <img  src="static/images/lupaicon.gif" style="align-content: center;" /><p style="color: white;">  Sin Resultados...</p>
+                {% else %}
+                <tr>
+              
+                  <th>Producto</th>
+                  <th>Codigo</th>
+              
+                  <th>Nombre</th>
+              
+                  <th>Precio</th>
+                  <th>Cantidad</th>
+                  
+                  
+                  
+              
+                </tr>
+                <tbody  >
+                  
+                  
+                  <tr>
+                  <!-- base 64-->
+                  {% for dato, dato2 in tabla %}
+                  
+                  
+                  {% set letter = dato2[0]| replace("b'", "") %}
+                  {% set letter2 = letter | replace("'", "") %}
+                  
+                  <td class="image_wrapper"><img src={{letter2}}  /></td>
+                  
+                  
+                  <td>{{ dato[0] }}</td>
+              
+                  <td>{{ dato[1] }}</td>
+              
+                  <td>{{ dato[2] }}</td>
+                  <td>{{ dato[3] }}</td>
+
+                  <td>
+
+                    {% if cat== 'C'%}
+                    <a href="/1compras{{dato[0]}}">Comprar</a>
+                    {% else %}
+                    <a href="/{{dato[0]}}edit">Editar</a>
+                    {% endif %}
+                    <a href="/{{dato[0]}}Y" >Detalle</a>
+                  </td>
+                  </tr>
+                {% endfor %}
+
+                {% endif %}
+                  
+
+                  
+              </table>
+              
+              
+              
+        </div>
+       
+      </div>
+     
+    </div>
+    <!-- end of latest_content_gallery -->
+    
+    <div class="content_section3">
+
+    </div>
+  </div>
+  <!-- end of content -->
+</div>
+<!-- end of wrapper -->
+<div id="footer_wrapper">
+  <div id="footer">
+    <ul class="footer_menu">
+      {% if username==0 %}
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/productos2">Producto</a></li>
+      <li><a href="/0compras12">Pedidos</a></li>
+      <li><a href="/Alink0">Galeria</a></li>
+      <li><a href="/aboutC">Sobre Nosotros</a></li>
+      <li class="last_menu"><a href="/Blink0">Contactenos</a></li>
+      {% endif %}
+      {% if username !=0 %}
+      <li><a  href="/loggeo" method="GET">Inicio</a></li>
+      <li><a href="/productos1">Producto</a></li>
+      {% if cat=='C' %}
+        <li><a href="/pedidoactual">Pedidos</a></li>
+        {% else %}        
+        <li><a href="/0venta">Pedidos</a></li>
+      {% endif %}
+      <li><a href="/Alink1">Galeria</a></li>
+      <li><a href="/aboutC">Sobre Nosotros</a></li>
+      <li class="last_menu"><a href="/Blink1">Contactenos</a></li>
+      {% endif %}
+    </ul>
+    Copyright &copy; 2020 <a href="#">Original Gifts</a> | Ñemby-Paraguay</div>
+  <!-- end of footer -->
+</div>
+<!-- end of footer_wrapper -->
+</body>
+</html>

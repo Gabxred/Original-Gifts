@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Original Gifts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="static/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="static/stylesheet/styles.css" />
+<script language="javascript" type="text/javascript">
+
+function clearText(field) {
+    if (field.defaultValue == field.value) field.value = '';
+    else if (field.value == '') field.value = field.defaultValue;
+}
+</script>
+<script language="javascript" type="text/javascript" src="static/scripts/mootools-1.2.1-core.js"></script>
+<script language="javascript" type="text/javascript" src="static/scripts/mootools-1.2-more.js"></script>
+<script language="javascript" type="text/javascript" src="static/scripts/slideitmoo-1.1.js"></script>
+<script language="javascript" type="text/javascript">
+window.addEvents({
+    'domready': function () { /* thumbnails example , div containers */
+        new SlideItMoo({
+            overallContainer: 'SlideItMoo_outer',
+            elementScrolled: 'SlideItMoo_inner',
+            thumbsContainer: 'SlideItMoo_items',
+            itemsVisible: 5,
+            elemsSlide: 3,
+            duration: 200,
+            itemsSelector: '.SlideItMoo_element',
+            itemWidth: 140,
+            showControls: 1
+        });
+    },
+
+});
+</script>
+</head>
+<body>
+<div id="wrapper">
+  <div id="menu">
+    <ul>
+      <li><a href="/loggeo" method="GET" class="current"><span>.01</span>Inicio</a></li>
+      <li><a href="/productos1"><span>.02</span>Productos</a></li>
+      <li><a href="/pedidoactual"><span>.03</span>Pedidos</a></li>
+      <li><a href="/Alink1"><span>.04</span>Galeria</a></li>
+      <li><a href="/aboutC"><span>.05</span>Nosotros</a></li>
+      <li><a href="/Blink1"><span>.06</span>Contactenos</a></li>
+    </ul>
+  </div>
+  <!-- end of menu -->
+  <div id="header_bar">
+    <div id="header">
+      <div class="right"></div>
+      <h1><a href="/loggeo" method="GET"> <img src="static/images/logo.png" alt="" /> </a></h1>
+    </div>
+    <div id="search_box">
+      <form action="/search1" method="POST">
+        <input type="text" value="Ingresa Texto..." name="buscar" size="10" id="searchfield" onfocus="clearText(this)" onblur="clearText(this)" />
+        <input type="submit" name="Search" value="" alt="Search" id="searchbutton" />      </form>
+    </div>
+    
+  </div>
+  <script>
+  function elegido(a)
+  {
+    var data = btoa(a);
+    document.getElementById("imagen2").src = "data:image/png/jpeg;base64," + data;
+  }
+</script>
+  <!-- end of header_bar -->
+  <div class="cleaner"></div>
+  <div id="sidebar">
+    <div class="sidebar_top"></div>
+    <div class="sidebar_bottom"></div>
+    <div class="sidebar_section">
+      <h2>Original gifts</h2>
+      <form action="/loggeo" method="POST">
+        <label>Bienvenido {{username}}</label>
+        <ul class="opcion_list">
+            <!-- Aqui e distinge los usuarios-->
+            {% if cat=='C' %}
+            <li><a href="/cuenta" method='GET'>Cuenta</a></li>
+            <li><a href="/pedidoactual">Mis pedidos</a></li>
+            {% endif %}
+
+            {% if cat=='A' %}
+                <li><a href="/invent" method='GET'>Inventario</a></li>
+                <li><a href="/adminusr">Administrar cuentas</a></li>
+                <li><a href="/0venta">Mis ventas</a></li>
+            {% endif %}
+            
+            
+            <li><a href="/">Cerrar sesion</a></li>
+        </ul>
+      </form>
+      <div class="cleaner"></div>
+    </div>
+    <div class="sidebar_section">
+      <h2>Categorias</h2>
+      <ul class="categories_list">
+       <li><a href="/1categoria1">Combos</a></li>
+        <li><a href="/1categoria2">Tazas</a></li>
+        <li><a href="/1categoria3">Medias</a></li>
+        <li><a href="/1categoria4">Collares</a></li>
+        <li><a href="/1categoria5">Vasos</a></li>
+        <li><a href="/1categoria6">Almohadas</a></li>
+        <li><a href="/1categoria7">Peluches</a></li>
+        <li><a href="/1categoria8">Pendrives</a></li>
+        <li><a href="/1categoria9">Pijamas</a></li>
+        <li><a href="/1categoria10">Otros</a></li>
+      </ul>
+    </div>
+    
+  </div>
+  <!-- end of sidebar -->
+  <div id="content">
+    <div id="latest_product_gallery">
+      <div id="SlideItMoo_outer6">
+        <div id="SlideItMoo_inner4">
+        
+            <table class="tablapedido">
+
+                <h2>Su pedido:</h2>
+                {% if error %}
+                <h2> Se ha enviado por correo la informacion para el pago y envio correspondiente</h2>  
+                {% endif %}
+                <img  src="static/images/carrito.gif" style="align-content: center;" />
+            
+                <tr>
+              
+                  
+                 
+                  
+                  <th>Nombre</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                  <th></th>
+                  
+              
+                </tr>
+                
+                <tbody  >
+                  
+                 {% for dato in tabla %} 
+                  <tr>
+                 
+                   
+                 
+                  <td>{{ dato[0] }}</td>
+              
+                  <td>{{ dato[1] }}</td>
+                  
+                  <td>{{ dato[2] }}</td>
+
+                  {% set calculo= dato[1]*dato[2] %}
+
+                  <td>
+
+                    
+                    <a href="/{{dato[3]}}eliminarp" onclick="return confirm('Estas seguro de borrar este producto?');" >Borrar producto</a>
+                  </td>
+                  <td style="visibility: hidden;">{{dato[3]}}</td>
+                 
+                  </tr>
+                  
+                  {% set total = calculo %}
+
+                {% endfor %}
+
+                
+                  
+
+                  
+              </table>
+              
+              
+              
+        </div>
+        <div>---------</div>
+        <div id="totalpedido" >
+            <a style="margin-top:20%;">Total:</a>
+            <input type="text" name="pedido" value="{{total}}" readonly >
+            {% if error %}
+            
+            {% else %}
+            {% if total== 0 %}
+              <a  href="#" onclick="return confirm('No puede confirmar un pedido sin articulos');">Confirmar</a>
+            <a href="#" onclick="return confirm('No puede cancelar un pedido sin articulo');">Cancelar</a><br>  
+            {% else %}
+            <a  href="/{{total}}estadopA" onclick="return confirm('Estas seguro de realizar el pago');">Confirmar</a>
+            <a href="/cancelar" onclick="return confirm('Estas seguro de cancelar el pedido?');">Cancelar</a><br>
+            {% endif%}
+            {% endif %}
+            
+            <div>--------</div>
+            <a href="/0pedidoanterior" >Ver pedidos anteriores</a>
+        </div>
+            
+      </div>
+     
+    </div>
+    <!-- end of latest_content_gallery -->
+    
+    <div class="content_section3">
+
+    </div>
+  </div>
+  <!-- end of content -->
+</div>
+<!-- end of wrapper -->
+<div id="footer_wrapper">
+  <div id="footer">
+    <ul class="footer_menu">
+      
+      <li><a  href="/loggeo" method="GET">Inicio</a></li>
+      
+      <li><a href="/productos1">Producto</a></li>
+      <li><a href="/pedidoactual">Pedidos</a></li>
+      <li><a href="/Alink1">Galeria</a></li>
+      <li><a href="/aboutC">Sobre Nosotros</a></li>
+      <li class="last_menu"><a href="/Blink1">Contactenos</a></li>
+    </ul>
+    Copyright &copy; 2020 <a href="#">Original Gifts</a> | Ñemby-Paraguay</div>
+  <!-- end of footer -->
+</div>
+<!-- end of footer_wrapper -->
+</body>
+</html>

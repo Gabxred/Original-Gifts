@@ -1,0 +1,56 @@
+<!DOCTYPE HTML5>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <STYLE type="text/css">
+        H2 { text-align: center}
+       div.centerTable table {
+       margin: 0 auto;
+       text-align: left;}
+    </STYLE>
+   <body>
+     
+   
+
+    <div class='centerTable'>
+    <table border="1">
+
+        <h2 >Inventario Original Gifts </h2>
+      
+        <tr>
+      
+          <th scope="col">Codigo</th>
+          <th scope="col">Nombre</th>
+      
+          <th scope="col">Precio</th>
+      
+          <th scope="col">Marca</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Categoria</th>
+          
+          
+      
+        </tr>
+        <tbody>
+          {% for data in invent %}
+      
+          <tr>
+          <td>{{ data[0] }}</td>
+      
+          <td>{{ data[1] }}</td>
+      
+          <td>{{ data[2] }}</td>
+      
+          <td>{{ data[3] }}</td>
+          <td>{{ data[4] }}</td>
+          <td>{{ data[5] }}</td>
+          
+         
+          </tr>
+        {% endfor %}
+      
+       
+      
+      </table>
+    </div> 
+  </body>
+</html>
